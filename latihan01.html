@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <title>Latihan 1 JSON</title>
+</head>
+
+<body>
+    <div class="container">
+        <form class="form-control m-4 border bg-dark text-white" style="padding: 50px;">
+            <h3 class="mb-4 text-uppercase">Format Form</h3>  
+            NIM : <input type="text" id="txNIM" class="form-control mb-4">
+            Nama : <input type="text" id="txNAMA" class="form-control mb-4">
+            Jenis Kelamin : <input type="text" id="txJKEL" class="form-control mb-4">
+            Pacar : <input type="text" id="txPACAR" class="form-control mb-4">
+            No Telepon : <input type="text" id="txNOTELP" class="form-control mb-4">
+            Hobby : <input type="text" id="txHOBBY" class="form-control">
+        </form>
+
+        <div class="col-md-12 p-4 m-4 border">
+            <h3  class="mb-4 text-uppercase">Format Text</h3><br>
+            NIM : <span id="txNIM2"></span><br> <br>
+            NAMA : <span id="txNAMA2"></span><br><br>
+            Jenis Kelamin : <span id="txJKEL2"></span><br><br>
+            Pacar : <span id="txPACAR2"></span><br><br>
+            No Telepon : <span id="txNOTELP2"></span><br><br>
+            Hobby : <span id="txHOBBY2"></span><br><br>
+        </div>
+    </div>
+
+    <script>
+        const bacadata = new XMLHttpRequest();
+        bacadata.open("GET", "http://localhost/sesi11/latihan01.php");
+        bacadata.send();
+        bacadata.onload = function () {
+            const dta = JSON.parse(this.responseText);
+            let jkel = (dta.JKEL == "L")?"Laki-laki":"Perempuan";
+            console.log(dta);
+            document.getElementById("txNIM").value = dta.NIM;
+            document.getElementById("txNAMA").value = dta.NAMA;
+            document.getElementById("txJKEL").value = jkel;
+            document.getElementById("txPACAR").value = dta.PACAR;
+            document.getElementById("txNOTELP").value = dta.NOTELP;
+            document.getElementById("txHOBBY").value = dta.HOBBY;
+            document.getElementById("txNIM2").innerText = dta.NIM;
+            document.getElementById("txNAMA2").innerText = dta.NAMA;
+            document.getElementById("txJKEL2").innerText = jkel;
+            document.getElementById("txPACAR2").innerText = dta.PACAR;
+            document.getElementById("txNOTELP2").innerText = dta.NOTELP;
+            document.getElementById("txHOBBY2").innerText = dta.HOBBY;
+        }
+    </script>
+</body>
+
+
+</html>
